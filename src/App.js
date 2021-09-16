@@ -1,7 +1,5 @@
 import React from "react";
 import {
-  Card,
-  CardContent,
   Container,
   CssBaseline,
   Grid,
@@ -10,14 +8,9 @@ import {
 } from "@material-ui/core";
 import Brightness3Icon from "@material-ui/icons/Brightness3";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Quotes from "./Quotes";
+import useStyle from "./style";
 
-const useStyle = makeStyles({
-  root: {
-    color: "blue",
-  },
-});
 function App() {
   const classes = useStyle();
   const [checked, setChecked] = React.useState(false);
@@ -26,41 +19,40 @@ function App() {
     <>
       <CssBaseline />
       {/* <Container maxWidth="lg" style={{ background: "blue" }}> => inline style*/}
-      <Container maxWidth="lg">
-        <Typography
-          className={classes.root}
-          align="center"
-          variant="h3"
-          component="h1"
-        >
-          Qoutes of the day
-        </Typography>
-        <Grid
-          container
-          xs
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-        >
-          {/* toggle start here */}
-          <Brightness3Icon />
-          <Switch
-            checked={checked}
-            size="medium"
-            onChange={(e) => setChecked(e.target.checked)}
-            color="default"
-            inputProps={{ "aria-label": "Night and day toggle" }}
-          />
-          <Brightness7Icon />
-        </Grid>
-        <Grid container justify="center">
-          <Card variant="outlined">
-            <CardContent>
-              <Quotes />
-            </CardContent>
-          </Card>
-        </Grid>
-      </Container>
+      <main>
+        <Container maxWidth="sm" className={classes.container}>
+          <Grid
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            className={classes.toggleBtn}
+          >
+            {/* toggle start here */}
+            <Brightness3Icon />
+            <Switch
+              checked={checked}
+              size="medium"
+              onChange={(e) => setChecked(e.target.checked)}
+              color="default"
+              inputProps={{ "aria-label": "Night and day toggle" }}
+            />
+            <Brightness7Icon />
+          </Grid>
+          <Typography
+            align="center"
+            variant="h3"
+            component="h1"
+            gutterBottom
+            color="textPrimary"
+          >
+            Qoutes of the day
+          </Typography>
+          <Grid container justifyContent="center">
+            <Quotes />
+          </Grid>
+        </Container>
+      </main>
     </>
   );
 }
