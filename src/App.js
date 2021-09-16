@@ -6,6 +6,7 @@ import {
   CssBaseline,
   Grid,
   Switch,
+  Typography,
 } from "@material-ui/core";
 import Brightness3Icon from "@material-ui/icons/Brightness3";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
@@ -24,43 +25,40 @@ function App() {
   return (
     <>
       <CssBaseline />
+      {/* <Container maxWidth="lg" style={{ background: "blue" }}> => inline style*/}
       <Container maxWidth="lg">
+        <Typography
+          className={classes.root}
+          align="center"
+          variant="h3"
+          component="h1"
+        >
+          Qoutes of the day
+        </Typography>
         <Grid
           container
-          direction="column"
+          xs
+          direction="row"
           justifyContent="center"
           alignItems="center"
         >
-          <Grid item xs>
-            <h1 className={classes.root}>Quotes of the day</h1>
-          </Grid>
-          {/* end grid header */}
-          <Grid
-            container
-            item
-            xs
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-          >
-            {/* toggle start here */}
-            <Brightness3Icon />
-            <Switch
-              checked={checked}
-              size="medium"
-              onChange={(e) => setChecked(e.target.checked)}
-              color="default"
-              inputProps={{ "aria-label": "Night and day toggle" }}
-            />
-            <Brightness7Icon />
-          </Grid>
-          <Grid item xs>
-            <Card variant="outlined">
-              <CardContent>
-                <Quotes />
-              </CardContent>
-            </Card>
-          </Grid>
+          {/* toggle start here */}
+          <Brightness3Icon />
+          <Switch
+            checked={checked}
+            size="medium"
+            onChange={(e) => setChecked(e.target.checked)}
+            color="default"
+            inputProps={{ "aria-label": "Night and day toggle" }}
+          />
+          <Brightness7Icon />
+        </Grid>
+        <Grid container justify="center">
+          <Card variant="outlined">
+            <CardContent>
+              <Quotes />
+            </CardContent>
+          </Card>
         </Grid>
       </Container>
     </>
