@@ -4,7 +4,7 @@ import useStyle from "./style";
 
 export default function Quotes() {
   const [fetchedQuote, setFetchedQuote] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch("https://quotable.io/random?tags=happiness&love")
       .then((res) => {
@@ -12,20 +12,19 @@ export default function Quotes() {
       })
       .then((data) => {
         setFetchedQuote(data);
-        setLoading(true);
+        setLoading(false);
       });
-  }, []);
+  }, [loading]);
+
+  function randomHandler() {
+    setLoading(!loading);
+  }
 
   const classes = useStyle();
   const cardContents = (
     <Card>
       <CardContent>
-        <Typography
-          variant="h5"
-          component="p"
-          color="textSecondary"
-          gutterBottom
-        >
+        <Typography variant="h5" component="p" color="textPrimary" gutterBottom>
           {fetchedQuote.content}
         </Typography>
         <Typography
@@ -38,11 +37,17 @@ export default function Quotes() {
           {fetchedQuote.author}
         </Typography>
       </CardContent>
-      <Button variant="contained" color="primary">
+      <Button
+        variant="contained"
+        color="primary"
+        size="small"
+        onClick={randomHandler}
+        className={classes.randomBtn}
+      >
         Random Quotes
       </Button>
     </Card>
   );
 
-  return <>{loading ? cardContents : "loading...."}</>;
+  return <>{loading ? "loading" : cardContents}</>;
 }
